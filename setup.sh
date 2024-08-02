@@ -48,12 +48,11 @@ COLORS_DIR_XFCE4TERMINAL=$HOME/.config/OhMyTermux/color_schemes/xfce4terminal
 FONTS_DIR_POWERLINE=$HOME/.config/OhMyTermux/fonts_powerline
 FONTS_DIR_TERMUXSTYLE=$HOME/.config/OhMyTermux/fonts_termuxstyle
 
-echo "Création des répertoires COLORS et FONTS"
-mkdir -p $COLORS_DIR_TERMUXSTYLE $COLORS_DIR_TERMUX $COLORS_DIR_XFCE4TERMINAL $FONTS_DIR_POWERLINE $FONTS_DIR_TERMUXSTYLE
+mkdir $HOME/.config/OhMyTermux
 
 # Décompression des fichiers ZIP
 echo "Décompression des fichiers ZIP ..."
-unzip -o "$HOME/OhMyTermux/color_schemes.zip" -d "$HOME/.config/OhMyTermux/color_schemes"
+unzip -o "$HOME/OhMyTermux/color_schemes.zip" -d "$HOME/.config/OhMyTermux"
 unzip -o "$HOME/OhMyTermux/fonts.zip" -d "$HOME/.config/OhMyTermux"
 
 # Application du thème Tokyonight
