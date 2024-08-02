@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "#####     OHMYTERMUX E    #####"
+echo "#####     OHMYTERMUX     #####"
 echo ""
 
 # Demande d'accès au stockage externe
