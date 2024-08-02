@@ -48,32 +48,17 @@ echo "Décompression des fichiers ZIP ..."
 unzip -o "$HOME/OhMyTermux/color_schemes.zip" -d "$HOME/.config/OhMyTermux/color_schemes"
 unzip -o "$HOME/OhMyTermux/fonts.zip" -d "$HOME/.config/OhMyTermux"
 
-# Copie des fichiers de couleurs
-echo "Copie des fichiers de couleurs ..."
-cp -r "$HOME/.config/OhMyTermux/color_schemes/termuxstyle" "$COLORS_DIR_TERMUXSTYLE"
-cp -r "$HOME/.config/OhMyTermux/color_schemes/termux" "$COLORS_DIR_TERMUX"
-cp -r "$HOME/.config/OhMyTermux/color_schemes/xfce4terminal" "$COLORS_DIR_XFCE4TERMINAL"
-echo "Fichiers de couleurs copiés ..."
-
 # Application du thème Tokyonight
-echo "Copie du fichier de couleurs Tokyonight ..."
+echo "Modification du thème par défaut ..."
 cp "$HOME/.config/OhMyTermux/color_schemes/termuxstyle/tokyonight.properties" "$HOME/.termux/colors.properties"
-echo "Fichier de couleurs Tokyonight copié ..."
-
-# Copie des polices
-echo "Copie des polices de caractères ..."
-cp -r "$HOME/.config/OhMyTermux/fonts_powerline" "$FONTS_DIR_POWERLINE"
-cp -r "$HOME/.config/OhMyTermux/fonts_termuxstyle" "$FONTS_DIR_TERMUXSTYLE"
-echo "Polices de caractères copiées ..."
 
 # Application de la police DejaVu
-echo "Copie de la police DejaVu ..."
+echo "Modification de la police par défaut ..."
 cp "$HOME/.config/OhMyTermux/fonts_termuxstyle/DejaVu.ttf" "$HOME/.termux/font.ttf"
-echo "Police DejaVu copiée ..."
 
 # Installation de Oh-My-Zsh et des plugins
 clear
-read -p "Appuyez sur Entrée pour installer Oh-My-Zsh et une sélection de plugins ..."
+read -p "Appuyez sur Entrée pour installer Oh-My-Zsh et des plugins ..."
 
 echo "Installation de Oh-My-Zsh ..."
 git clone https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh"
@@ -106,9 +91,10 @@ source ~/.zshrc
 
 echo "      Configuration terminée !     "
 echo "#####     Liste des alias     #####"
+écho ""
 bat "$HOME/.oh-my-zsh/custom/aliases.zsh"
+écho ""
 read -p "Appuyez sur Entrée pour redémarrer ..."
 
 clear
-# Lancer zsh sans remplacer le shell actuel
-zsh
+exec zsh
