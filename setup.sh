@@ -20,7 +20,7 @@ pkg update -y && pkg upgrade -y
 # Installation des packages Termux
 clear
 read -p "Appuyez sur Entrée pour installer les packages Termux ..."
-pkg install -y wget git zsh curl nala eza lf fzf bat
+pkg install -y wget git zsh curl nala eza lf fzf bat unzip
 
 # Téléchargement des thèmes Termux
 clear
@@ -110,4 +110,5 @@ bat "$HOME/.oh-my-zsh/custom/aliases.zsh"
 read -p "Appuyez sur Entrée pour redémarrer ..."
 
 clear
-exec zsh
+# Lancer zsh sans remplacer le shell actuel
+zsh
