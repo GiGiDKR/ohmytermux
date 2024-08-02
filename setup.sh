@@ -34,6 +34,14 @@ sed -i '128s/^#//' $HOME/.termux/termux.properties
 sed -i '160s/^#//' $HOME/.termux/termux.properties
 rm -f $PREFIX/etc/motd
 
+echo "Création des répertoires utilisateur ..."
+#mkdir $HOME/Desktop
+mkdir $HOME/Downloads
+#mkdir $HOME/Pictures
+#mkdir $HOME/Videos
+ln -s $HOME/storage/music Music 
+ln -s $HOME/storage/documents Documents 
+
 COLORS_DIR_TERMUXSTYLE=$HOME/.config/OhMyTermux/color_schemes/termuxstyle
 COLORS_DIR_TERMUX=$HOME/.config/OhMyTermux/color_schemes/termux
 COLORS_DIR_XFCE4TERMINAL=$HOME/.config/OhMyTermux/color_schemes/xfce4terminal
