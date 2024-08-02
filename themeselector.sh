@@ -1,6 +1,9 @@
 #!/bin/bash
 
-THEMES_DIR="$HOME/.config/OhMyTermux/colors"  # Nouveau chemin du répertoire des thèmes
+# Définir les nouveaux chemins d'accès
+COLORS_DIR_TERMUXSTYLE="$HOME/.config/OhMyTermux/color_schemes/termuxstyle"
+COLORS_DIR_TERMUX="$HOME/.config/OhMyTermux/color_schemes/termux"
+
 TERMUX_COLORS="$HOME/.termux/colors.properties"
 BACKUP_COLORS="$HOME/.termux/colors.properties.backup"
 
@@ -73,7 +76,8 @@ appliquer_theme() {
     fi
 }
 
-for theme_file in "$THEMES_DIR"/*.properties; do
+# Parcourir les thèmes dans les deux répertoires
+for theme_file in "$COLORS_DIR_TERMUXSTYLE"/*.properties "$COLORS_DIR_TERMUX"/*.properties; do
     theme_name=$(basename "$theme_file" .properties)
     appliquer_theme "$theme_file" "$theme_name"
 done
