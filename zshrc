@@ -1,113 +1,146 @@
-#!/bin/bash
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
-echo "#####     OHMYTERMUX E    #####"
-echo ""
+# If you come from bash you might have to change your $PATH.
+export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
-# Demande d'accès au stockage externe
-read -p "Appuyez sur Entrée pour accorder l'accès au stockage externe ..."
-termux-setup-storage
+# Path to your Oh My Zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
 
-# Sélection du répertoire de sources Termux
-clear
-read -p "Appuyez sur Entrée pour sélectionner un repository ..."
-termux-change-repo
+# Needed to make gpg(2) work
+export GPG_TTY="${TTY}"
 
-# Mise à jour de Termux
-clear
-read -p "Appuyez sur Entrée pour lancer la mise à jour de Termux ..."
-pkg update -y && pkg upgrade -y
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time Oh My Zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
-# Installation des packages Termux
-clear
-read -p "Appuyez sur Entrée pour installer les packages Termux ..."
-pkg install -y wget git zsh curl nala eza lf fzf bat
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in $ZSH/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
-# Téléchargement des thèmes Termux
-clear
-read -p "Appuyez sur Entrée pour configurer graphiquement Termux ..."
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
 
-echo "Configuration de Termux ..."
-mkdir -p $HOME/.termux
-touch $HOME/.termux/termux.properties
-sed -i '21s/^#//' $HOME/.termux/termux.properties
-sed -i '128s/^#//' $HOME/.termux/termux.properties
-sed -i '160s/^#//' $HOME/.termux/termux.properties
-rm -f $PREFIX/etc/motd
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
 
-COLORS_DIR_TERMUXSTYLE=$HOME/.config/OhMyTermux/color_schemes/termuxstyle
-COLORS_DIR_TERMUX=$HOME/.config/OhMyTermux/color_schemes/termux
-COLORS_DIR_XFCE4TERMINAL=$HOME/.config/OhMyTermux/color_schemes/xfce4terminal
-FONTS_DIR_POWERLINE=$HOME/.config/OhMyTermux/fonts_powerline
-FONTS_DIR_TERMUXSTYLE=$HOME/.config/OhMyTermux/fonts_termuxstyle
+# Uncomment one of the following lines to change the auto-update behavior
+zstyle ':omz:update' mode prompt  # asks for confirmation before updating (default mode)
+# zstyle ':omz:update' mode disabled  # disable automatic updates
+# zstyle ':omz:update' mode auto      # update automatically without asking
+# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
-echo "Création des répertoires COLORS et FONTS"
-mkdir -p $COLORS_DIR_TERMUXSTYLE $COLORS_DIR_TERMUX $COLORS_DIR_XFCE4TERMINAL $FONTS_DIR_POWERLINE $FONTS_DIR_TERMUXSTYLE
+# Uncomment the following line to change how often to auto-update (in days).
+# zstyle ':omz:update' frequency 13
 
-# Décompression des fichiers ZIP
-echo "Décompression des fichiers ZIP ..."
-unzip -o "$HOME/OhMyTermux/color_schemes.zip" -d "$HOME/.config/OhMyTermux/color_schemes"
-unzip -o "$HOME/OhMyTermux/fonts.zip" -d "$HOME/.config/OhMyTermux"
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS="true"
 
-# Copie des fichiers de couleurs
-echo "Copie des fichiers de couleurs ..."
-cp -r "$HOME/.config/OhMyTermux/color_schemes/termuxstyle" "$COLORS_DIR_TERMUXSTYLE"
-cp -r "$HOME/.config/OhMyTermux/color_schemes/termux" "$COLORS_DIR_TERMUX"
-cp -r "$HOME/.config/OhMyTermux/color_schemes/xfce4terminal" "$COLORS_DIR_XFCE4TERMINAL"
-echo "Fichiers de couleurs copiés ..."
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
 
-# Application du thème Tokyonight
-echo "Copie du fichier de couleurs Tokyonight ..."
-cp "$HOME/.config/OhMyTermux/color_schemes/termuxstyle/tokyonight.properties" "$HOME/.termux/colors.properties"
-echo "Fichier de couleurs Tokyonight copié ..."
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
 
-# Copie des polices
-echo "Copie des polices de caractères ..."
-cp -r "$HOME/.config/OhMyTermux/fonts_powerline" "$FONTS_DIR_POWERLINE"
-cp -r "$HOME/.config/OhMyTermux/fonts_termuxstyle" "$FONTS_DIR_TERMUXSTYLE"
-echo "Polices de caractères copiées ..."
+# Uncomment the following line to enable command auto-correction.
+ENABLE_CORRECTION="true"
 
-# Application de la police DejaVu
-echo "Copie de la police DejaVu ..."
-cp "$HOME/.config/OhMyTermux/fonts_termuxstyle/DejaVu.ttf" "$HOME/.termux/font.ttf"
-echo "Police DejaVu copiée ..."
+# Uncomment the following line to display red dots whilst waiting for completion.
+# You can also set it to another string to have that shown instead of the default red dots.
+# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
+# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
+# COMPLETION_WAITING_DOTS="true"
 
-# Installation de Oh-My-Zsh et des plugins
-clear
-read -p "Appuyez sur Entrée pour installer Oh-My-Zsh et une sélection de plugins ..."
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-echo "Installation de Oh-My-Zsh ..."
-git clone https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh"
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
+HIST_STAMPS="dd/mm/yyyy"
 
-echo "Installation du thème powerlevel10k ..."
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/.oh-my-zsh/custom/themes/powerlevel10k"
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
 
-echo "Installation des plugins ..."
-git clone https://github.com/zsh-users/zsh-autosuggestions.git "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
-git clone https://github.com/zsh-users/zsh-completions.git "$HOME/.oh-my-zsh/custom/plugins/zsh-completions"
-git clone https://github.com/MichaelAquilina/zsh-you-should-use.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/you-should-use
-git clone https://github.com/olets/zsh-abbr ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-abbr
-git clone https://github.com/akash329d/zsh-alias-finder ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-alias-finder
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(
+	git
+	zsh-alias-finder
+	zsh-abbr
+	zsh-autosuggestions
+	you-should-use
+	command-not-found
+	copyfile
+	node
+	npm
+	vscode
+	web-search
+	zsh-completions
+	timer
+)
 
-echo "Configuration de Oh-My-Zsh ..."
-cp -f "$HOME/OhMyTermux/zshrc" "$HOME/.zshrc"
-cp -f "$HOME/OhMyTermux/aliases.zsh" "$HOME/.oh-my-zsh/custom/aliases.zsh"
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 
-echo "Configuration du thème powerlevel10k ..."
-cp -f "$HOME/OhMyTermux/p10k.zsh" "$HOME/.p10k.zsh"
+source $ZSH/oh-my-zsh.sh
 
-echo "Oh-My-Zsh installé !"
-termux-reload-settings
+# User configuration
 
-echo "Définition de zsh comme shell par défaut ..."
-chsh -s zsh
+export MANPATH="${PREFIX}/share/man":"${MANPATH}"
 
-source ~/.zshrc
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
 
-echo "      Configuration terminée !     "
-echo "#####     Liste des alias     #####"
-bat "$HOME/.oh-my-zsh/custom/aliases.zsh"
-read -p "Appuyez sur Entrée pour redémarrer ..."
+# Use lf to switch directories and bind it to CTRL+O
+if [ -f "${HOME}/.config/lf/lfcd.sh" ]; then
+    source "${HOME}/.config/lf/lfcd.sh"
+    bindkey -s "^o" "lfcd\n" # Just change lfcd part to lf here if you don't want directory to preserve on quitting lf
+fi
 
-clear
-exec zsh
+# Edit line in text editor with CTRL+E
+autoload edit-command-line; zle -N edit-command-line
+bindkey "^e" edit-command-line
+
+# Preferred editor for local sessions
+export EDITOR="nano"
+export VISUAL="nano"
+
+# Preferred editor for ssh sessions
+if [[ ! -z "${SSH_CONNECTION}" ]]; then
+    export EDITOR="nano"
+fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+# Set personal aliases, overriding those provided by Oh My Zsh libs,
+# plugins, and themes. Aliases can be placed here, though Oh My Zsh
+# users are encouraged to define aliases within a top-level file in
+# the $ZSH_CUSTOM folder, with .zsh extension. Examples:
+# - $ZSH_CUSTOM/aliases.zsh
+# - $ZSH_CUSTOM/macos.zsh
+# For a full list of active aliases, run `alias`.
+#
+# Example aliase
+# alias zshconfig="nano ~/.zshrc"
+# alias ohmyzsh="nano ~/.oh-my-zsh"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
