@@ -45,8 +45,8 @@ ln -s $HOME/storage/documents Documents
 COLORS_DIR_TERMUXSTYLE=$HOME/.config/OhMyTermux/color_schemes/termuxstyle
 COLORS_DIR_TERMUX=$HOME/.config/OhMyTermux/color_schemes/termux
 COLORS_DIR_XFCE4TERMINAL=$HOME/.config/OhMyTermux/color_schemes/xfce4terminal
-FONTS_DIR_POWERLINE=$HOME/.config/OhMyTermux/fonts_powerline
-FONTS_DIR_TERMUXSTYLE=$HOME/.config/OhMyTermux/fonts_termuxstyle
+FONTS_DIR_POWERLINE=$HOME/.config/OhMyTermux/fonts/fonts_powerline
+FONTS_DIR_TERMUXSTYLE=$HOME/.config/OhMyTermux/fonts/fonts_termuxstyle
 
 mkdir $HOME/.config/OhMyTermux
 
@@ -61,7 +61,7 @@ cp "$HOME/.config/OhMyTermux/color_schemes/termuxstyle/tokyonight.properties" "$
 
 # Application de la police DejaVu
 echo "Modification de la police par défaut ..."
-cp "$HOME/.config/OhMyTermux/fonts_termuxstyle/DejaVu.ttf" "$HOME/.termux/font.ttf"
+cp "$HOME/.config/OhMyTermux/fonts/fonts_termuxstyle/DejaVu.ttf" "$HOME/.termux/font.ttf"
 
 # Installation de Oh-My-Zsh et des plugins
 clear
