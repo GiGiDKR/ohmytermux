@@ -33,6 +33,7 @@ mkdir $HOME/Downloads
 #mkdir $HOME/Videos
 ln -s $HOME/storage/music Music 
 ln -s $HOME/storage/documents Documents
+rm -f $PREFIX/etc/motd
 
 cp -r $HOME/OhMyTermux/src/* $HOME/.termux/
 
