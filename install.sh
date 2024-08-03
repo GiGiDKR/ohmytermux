@@ -84,7 +84,7 @@ source ~/.zshrc
 clear
 echo "      Configuration terminée !     "
 echo "#####     Liste des alias     #####"
-écho ""
+echo ""
 bat "$HOME/.oh-my-zsh/custom/aliases.zsh"
 echo ""
 read -p "Appuyez sur Entrée pour redémarrer ..."
