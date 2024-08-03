@@ -80,11 +80,12 @@ chsh -s zsh
 
 source ~/.zshrc
 
+clear
 echo "      Configuration terminée !     "
 echo "#####     Liste des alias     #####"
 écho ""
 bat "$HOME/.oh-my-zsh/custom/aliases.zsh"
-écho ""
+echo ""
 read -p "Appuyez sur Entrée pour redémarrer ..."
 
 clear
