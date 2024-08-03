@@ -22,10 +22,10 @@ clear
 read -p "Appuyez sur Entrée pour installer les packages Termux ..."
 pkg install -y wget git zsh curl nala eza lf fzf bat unzip
 
-# Téléchargement des thèmes Termux
 clear
-read -p "Appuyez sur Entrée pour configurer graphiquement Termux ..."
+read -p "Appuyez sur Entrée pour configurer Termux ..."
 
+cd ~/
 echo "Création des répertoires utilisateur ..."
 #mkdir $HOME/Desktop
 mkdir $HOME/Downloads
@@ -33,6 +33,8 @@ mkdir $HOME/Downloads
 #mkdir $HOME/Videos
 ln -s $HOME/storage/music Music 
 ln -s $HOME/storage/documents Documents
+
+cp -r $HOME/OhMyTermux/src/* $HOME/.termux/
 
 COLORS_DIR_TERMUXSTYLE=$HOME/.termux/colors/termuxstyle
 COLORS_DIR_TERMUX=$HOME/.termux/colors/termux
@@ -44,8 +46,7 @@ FONTS_DIR_TERMUXSTYLE=$HOME/.termux/fonts/fonts_termuxstyle
 
 # Décompression du fichier ZIP
 echo "Décompression du fichier ZIP ..."
-unzip -o "$HOME/OhMyTermux/src/colors.zip" -d "$HOME/.termux"
-unzip -o "$HOME/OhMyTermux/src/fonts_termuxstyle.zip'" -d "$HOME/.termux/fonts"
+unzip -o "$HOME/.termux/fonts_termuxstyle.zip" -d "$HOME/.termux/fonts"
 
 # Installation de Oh-My-Zsh et des plugins
 clear
