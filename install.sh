@@ -45,9 +45,10 @@ mkdir $HOME/.termux/fonts
 FONTS_DIR_POWERLINE=$HOME/.termux/fonts/fonts_powerline
 FONTS_DIR_TERMUXSTYLE=$HOME/.termux/fonts/fonts_termuxstyle
 
-# Décompression du fichier ZIP
-echo "Décompression du fichier ZIP ..."
+# Décompression des fichiers ZIP
+echo "Décompression des fichiers ZIP ..."
 unzip -o "$HOME/.termux/fonts_termuxstyle.zip" -d "$HOME/.termux/fonts"
+unzip -o "$HOME/.termux/colors.zip" -d "$HOME/.termux/"
 
 # Installation de Oh-My-Zsh et des plugins
 clear
