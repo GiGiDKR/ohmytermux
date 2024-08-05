@@ -1,4 +1,4 @@
-# Oh-My-Termux
+# OhMyTermux
 
 Automated installation and configuration of Termux.
 
