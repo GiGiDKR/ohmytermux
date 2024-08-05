@@ -17,12 +17,16 @@ Package sélection :
 - python (optionnal ?)
 
 Installation of Oh-My-Zsh with selection of useful plugins :
-...
+- zsh-syntax-highlighting
+- zsh-completions
+- zsh-you-should-use
+- zsh-abbr
+- zsh-alias-finder
 
 Default Termux graphics configuration :
 - Font
 - Color
-- Custom Powerline prompt
+- Custom Powerlevel10k prompt
 
 Directory of various scipts :
 - Theme Selector
