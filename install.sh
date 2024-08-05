@@ -14,25 +14,29 @@ termux-change-repo
 
 # Mise à jour de Termux
 clear
-read -p "Appuyez sur Entrée pour lancer la mise à jour de Termux ..."
+read -p "Appuyez sur Entrée pour exécuter l'installation de Termux ..."
 pkg update -y && pkg upgrade -y
 
 # Installation des packages Termux
 clear
-read -p "Appuyez sur Entrée pour installer les packages Termux ..."
 pkg install -y wget git zsh curl nala eza lf fzf bat unzip
 
 clear
+écho "Termux à jour et packages installés !"
 read -p "Appuyez sur Entrée pour configurer Termux ..."
 
 cd ~/
+clear
 echo "Création des répertoires utilisateur ..."
 #mkdir $HOME/Desktop
-mkdir $HOME/Downloads
-#mkdir $HOME/Pictures
-#mkdir $HOME/Videos
-ln -s $HOME/storage/music Music 
-ln -s $HOME/storage/documents Documents
+ln -s $HOME/storage/downloads "Téléchargement"
+ln -s $HOME/storage/pictures "Images"
+ln -s $HOME/storage/dcim "Photos"
+ln -s $HOME/storage/movies "Vidéos"
+ln -s $HOME/storage/music "Musique"
+ln -s $HOME/storage/documents "Documents"
+ln -s $HOME/storage/shared "Stockage Interne"
+
 rm -f $PREFIX/etc/motd
 
 cp -r $HOME/OhMyTermux/src/* $HOME/.termux/
@@ -46,7 +50,8 @@ FONTS_DIR_POWERLINE=$HOME/.termux/fonts/fonts_powerline
 FONTS_DIR_TERMUXSTYLE=$HOME/.termux/fonts/fonts_termuxstyle
 
 # Décompression des fichiers ZIP
-echo "Décompression des fichiers ZIP ..."
+clear
+echo "Décompression des archives ..."
 unzip -o "$HOME/.termux/fonts_termuxstyle.zip" -d "$HOME/.termux/fonts"
 unzip -o "$HOME/.termux/colors.zip" -d "$HOME/.termux/"
 
@@ -57,9 +62,11 @@ read -p "Appuyez sur Entrée pour installer Oh-My-Zsh et des plugins ..."
 echo "Installation de Oh-My-Zsh ..."
 git clone https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh"
 
+clear
 echo "Installation du thème powerlevel10k ..."
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/.oh-my-zsh/custom/themes/powerlevel10k"
 
+clear
 echo "Installation des plugins ..."
 git clone https://github.com/zsh-users/zsh-autosuggestions.git "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
@@ -68,13 +75,16 @@ git clone https://github.com/MichaelAquilina/zsh-you-should-use.git ${ZSH_CUSTOM
 git clone https://github.com/olets/zsh-abbr ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-abbr
 git clone https://github.com/akash329d/zsh-alias-finder ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-alias-finder
 
+clear
 echo "Configuration de Oh-My-Zsh ..."
 cp -f "$HOME/OhMyTermux/zshrc" "$HOME/.zshrc"
 cp -f "$HOME/OhMyTermux/aliases.zsh" "$HOME/.oh-my-zsh/custom/aliases.zsh"
 
+clear
 echo "Configuration du thème powerlevel10k ..."
 cp -f "$HOME/OhMyTermux/p10k.zsh" "$HOME/.p10k.zsh"
 
+clear
 echo "Oh-My-Zsh installé !"
 termux-reload-settings
 
@@ -84,12 +94,13 @@ chsh -s zsh
 source ~/.zshrc
 
 clear
-echo "      Configuration terminée !     "
-echo "#####     Liste des alias     #####"
+echo "(⁠^⁠^⁠) Installation de OhMyTermux terminée !"
 echo ""
-bat "$HOME/.oh-my-zsh/custom/aliases.zsh"
-echo ""
+echo ("⁠*⁠_⁠*⁠) Saisir 'help' pour obtenir les informations sur la configuration"
+écho ""
 read -p "Appuyez sur Entrée pour redémarrer ..."
+
+rm -rf $HOME/OhMyTermux
 
 clear
 exec zsh
