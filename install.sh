@@ -77,19 +77,60 @@ unzip -o "$HOME/.termux/colors.zip" -d "$HOME/.termux/"
 clear
 read -p "Appuyez sur Entrée pour installer Oh-My-Zsh et des plugins ..."
 
+# Vérifier et supprimer les répertoires existants
+if [ -d "$HOME/.oh-my-zsh" ]; then
+    echo -e "${RED}Le répertoire .oh-my-zsh existe déjà. Suppression...${NC}"
+    rm -rf "$HOME/.oh-my-zsh"
+fi
+
+if [ -d "$HOME/.oh-my-zsh/custom/themes/powerlevel10k" ]; then
+    echo -e "${RED}Le répertoire powerlevel10k existe déjà. Suppression...${NC}"
+    rm -rf "$HOME/.oh-my-zsh/custom/themes/powerlevel10k"
+fi
+
+if [ -d "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions" ]; then
+    echo -e "${RED}Le répertoire zsh-autosuggestions existe déjà. Suppression...${NC}"
+    rm -rf "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+fi
+
+if [ -d "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" ]; then
+    echo -e "${RED}Le répertoire zsh-syntax-highlighting existe déjà. Suppression...${NC}"
+    rm -rf "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+fi
+
+if [ -d "$HOME/.oh-my-zsh/custom/plugins/zsh-completions" ]; then
+    echo -e "${RED}Le répertoire zsh-completions existe déjà. Suppression...${NC}"
+    rm -rf "$HOME/.oh-my-zsh/custom/plugins/zsh-completions"
+fi
+
+if [ -d "$HOME/.oh-my-zsh/custom/plugins/you-should-use" ]; then
+    echo -e "${RED}Le répertoire you-should-use existe déjà. Suppression...${NC}"
+    rm -rf "$HOME/.oh-my-zsh/custom/plugins/you-should-use"
+fi
+
+if [ -d "$HOME/.oh-my-zsh/custom/plugins/zsh-abbr" ]; then
+    echo -e "${RED}Le répertoire zsh-abbr existe déjà. Suppression...${NC}"
+    rm -rf "$HOME/.oh-my-zsh/custom/plugins/zsh-abbr"
+fi
+
+if [ -d "$HOME/.oh-my-zsh/custom/plugins/zsh-alias-finder" ]; then
+    echo -e "${RED}Le répertoire zsh-alias-finder existe déjà. Suppression...${NC}"
+    rm -rf "$HOME/.oh-my-zsh/custom/plugins/zsh-alias-finder"
+fi
+
 echo -e "${BLUE}Installation de Oh-My-Zsh ...${NC}"
-git clone https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh"
+git clone https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh" || true
 
 echo -e "${YELLOW}Installation du thème powerlevel10k ...${NC}"
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/.oh-my-zsh/custom/themes/powerlevel10k"
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/.oh-my-zsh/custom/themes/powerlevel10k" || true
 
 echo -e "${GREEN}Installation des plugins ...${NC}"
-git clone https://github.com/zsh-users/zsh-autosuggestions.git "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
-git clone https://github.com/zsh-users/zsh-completions.git "$HOME/.oh-my-zsh/custom/plugins/zsh-completions"
-git clone https://github.com/MichaelAquilina/zsh-you-should-use.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/you-should-use
-git clone https://github.com/olets/zsh-abbr ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-abbr
-git clone https://github.com/akash329d/zsh-alias-finder ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-alias-finder
+git clone https://github.com/zsh-users/zsh-autosuggestions.git "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions" || true
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" || true
+git clone https://github.com/zsh-users/zsh-completions.git "$HOME/.oh-my-zsh/custom/plugins/zsh-completions" || true
+git clone https://github.com/MichaelAquilina/zsh-you-should-use.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/you-should-use || true
+git clone https://github.com/olets/zsh-abbr ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-abbr || true
+git clone https://github.com/akash329d/zsh-alias-finder ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-alias-finder || true
 
 echo -e "${BLUE}Configuration de Oh-My-Zsh ...${NC}"
 cp -f "$HOME/OhMyTermux/zshrc" "$HOME/.zshrc"
