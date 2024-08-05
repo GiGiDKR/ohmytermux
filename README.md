@@ -2,7 +2,7 @@
 
 Automated installation and configuration of Termux.
 
-Package sélection :
+🧊 Package sélection :
 - wget
 - curl
 - gît
@@ -16,19 +16,23 @@ Package sélection :
 - glow (optionnal ?)
 - python (optionnal ?)
 
-Installation of Oh-My-Zsh with selection of useful plugins :
+🧊 ZSH shell set by default :
+- Custom aliases
+- Link to internal storage user directories (optional)
+
+🧊 Installation of Oh-My-Zsh with selection of useful plugins :
 - zsh-syntax-highlighting
 - zsh-completions
 - zsh-you-should-use
 - zsh-abbr
 - zsh-alias-finder
 
-Default Termux graphics configuration :
+🧊 Default Termux graphics configuration :
 - Font
 - Color
 - Custom Powerlevel10k prompt
 
-Directory of various scipts :
+🧊 Directory of various scipts :
 - Theme Selector
 - Nerd Fonts Installer
 - Custom Debian proot-distro
