@@ -15,8 +15,8 @@ banner() {
     echo ""
 }
 
-# Arrêter le script en cas d'erreur
-set -e
+# Ne pas arrêter le script en cas d'erreur
+# set -e
 
 # Afficher la bannière
 banner
@@ -55,10 +55,13 @@ ln -s $HOME/storage/music "🎵 Musique"
 ln -s $HOME/storage/documents "📄 Documents"
 ln -s $HOME/storage/shared "📁 Stockage Interne"
 
+# Suppression du message de bienvenue par défaut de Termux
 rm -f $PREFIX/etc/motd
 
+# Copier les fichiers de configuration personnalisés
 cp -r $HOME/OhMyTermux/src/* $HOME/.termux/
 
+# Définir les répertoires de couleurs et de polices
 COLORS_DIR_TERMUXSTYLE=$HOME/.termux/colors/termuxstyle
 COLORS_DIR_TERMUX=$HOME/.termux/colors/termux
 COLORS_DIR_XFCE4TERMINAL=$HOME/.termux/colors/xfce4terminal
@@ -78,45 +81,19 @@ clear
 read -p "Appuyez sur Entrée pour installer Oh-My-Zsh et des plugins ..."
 
 # Vérifier et supprimer les répertoires existants
-if [ -d "$HOME/.oh-my-zsh" ]; then
-    echo -e "${RED}Le répertoire .oh-my-zsh existe déjà. Suppression...${NC}"
-    rm -rf "$HOME/.oh-my-zsh"
-fi
-
-if [ -d "$HOME/.oh-my-zsh/custom/themes/powerlevel10k" ]; then
-    echo -e "${RED}Le répertoire powerlevel10k existe déjà. Suppression...${NC}"
-    rm -rf "$HOME/.oh-my-zsh/custom/themes/powerlevel10k"
-fi
-
-if [ -d "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions" ]; then
-    echo -e "${RED}Le répertoire zsh-autosuggestions existe déjà. Suppression...${NC}"
-    rm -rf "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
-fi
-
-if [ -d "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" ]; then
-    echo -e "${RED}Le répertoire zsh-syntax-highlighting existe déjà. Suppression...${NC}"
-    rm -rf "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
-fi
-
-if [ -d "$HOME/.oh-my-zsh/custom/plugins/zsh-completions" ]; then
-    echo -e "${RED}Le répertoire zsh-completions existe déjà. Suppression...${NC}"
-    rm -rf "$HOME/.oh-my-zsh/custom/plugins/zsh-completions"
-fi
-
-if [ -d "$HOME/.oh-my-zsh/custom/plugins/you-should-use" ]; then
-    echo -e "${RED}Le répertoire you-should-use existe déjà. Suppression...${NC}"
-    rm -rf "$HOME/.oh-my-zsh/custom/plugins/you-should-use"
-fi
-
-if [ -d "$HOME/.oh-my-zsh/custom/plugins/zsh-abbr" ]; then
-    echo -e "${RED}Le répertoire zsh-abbr existe déjà. Suppression...${NC}"
-    rm -rf "$HOME/.oh-my-zsh/custom/plugins/zsh-abbr"
-fi
-
-if [ -d "$HOME/.oh-my-zsh/custom/plugins/zsh-alias-finder" ]; then
-    echo -e "${RED}Le répertoire zsh-alias-finder existe déjà. Suppression...${NC}"
-    rm -rf "$HOME/.oh-my-zsh/custom/plugins/zsh-alias-finder"
-fi
+for dir in "$HOME/.oh-my-zsh" \
+           "$HOME/.oh-my-zsh/custom/themes/powerlevel10k" \
+           "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions" \
+           "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" \
+           "$HOME/.oh-my-zsh/custom/plugins/zsh-completions" \
+           "$HOME/.oh-my-zsh/custom/plugins/you-should-use" \
+           "$HOME/.oh-my-zsh/custom/plugins/zsh-abbr" \
+           "$HOME/.oh-my-zsh/custom/plugins/zsh-alias-finder"; do
+    if [ -d "$dir" ]; then
+        echo -e "${RED}Le répertoire $(basename $dir) existe déjà. Suppression...${NC}"
+        rm -rf "$dir"
+    fi
+done
 
 echo -e "${BLUE}Installation de Oh-My-Zsh ...${NC}"
 git clone https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh" || true
@@ -149,12 +126,18 @@ chsh -s zsh
 source ~/.zshrc
 
 clear
-echo -e "${GREEN} Installation de OhMyTermux terminée !${NC}"
+echo -e "${GREEN}Installation de OhMyTermux terminée !${NC}"
 echo ""
 echo -e "${YELLOW}(⁠*⁠_⁠*⁠) Saisir 'help' pour des informations sur la configuration${NC}"
 echo ""
 read -p "Appuyez sur Entrée pour redémarrer ..."
 
+# Copier les scripts dans le répertoire $HOME/Scripts
+mkdir -p $HOME/Scripts
+cp -r $HOME/OhMyTermux/scripts/* $HOME/Scripts/
+echo -e "${BLUE}Scripts copiés dans le répertoire ~/Scripts.${NC}"
+
+# Nettoyage
 rm -rf $HOME/OhMyTermux
 
 clear
