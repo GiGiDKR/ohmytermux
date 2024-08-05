@@ -3,11 +3,18 @@
 Automated installation and configuration of Termux.
 
 Package sélection :
+- wget
+- curl
 - gît
 - zsh
 - nala
+- eza
 - bat
-...
+- lf
+- fzf  
+- unzip (with uninstall after script execution ?)
+- glow (optionnal ?)
+- python (optionnal ?)
 
 Installation of Oh-My-Zsh with selection of useful plugins :
 ...
