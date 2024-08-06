@@ -34,8 +34,6 @@ center_color_text "                   /___/                                  " "
 # Ne pas arrêter le script en cas d'erreur
 # set -e
 
-# Afficher la bannière
-banner
 echo ""
 # Demande d'accès au stockage externe
 read -p "Appuyez sur Entrée pour accorder l'accès au stockage externe ..."
