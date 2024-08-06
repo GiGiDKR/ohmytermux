@@ -22,27 +22,28 @@ EOF
 center_color_text() {
     local text="$1"
     local color="$2"
-    local width=$(stty size | awk '{print $2}')
-    local padding=$(( (width - ${#text}) / 2 ))
-    printf "%*s${color}%s${RESET}\n" $padding '' "$text"
+    local width=$(( (COLUMNS - ${#text}) / 2 ))
+    printf "%*s${color}%s${RESET}\n" $width '' "$text"
 }
 
 # Fonction pour centrer une ligne de texte sans couleur
 center_text() {
     local text="$1"
-    local width=$(stty size | awk '{print $2}')
-    local padding=$(( (width - ${#text}) / 2 ))
-    printf "%*s%s\n" $padding '' "$text"
+    local width=$(( (COLUMNS - ${#text}) / 2 ))
+    printf "%*s%s\n" $width '' "$text"
 }
 
 # Fonction pour afficher la bannière
 display_banner() {
+    # Obtenir la largeur du terminal
+    COLUMNS=$(tput cols)
     while IFS= read -r line; do
         center_color_text "$line" "$BLUE"
     done <<< "$banner"
 }
 
 # Assurez-vous que ncurses-utils est installé
+pkg update -y && pkg upgrade -y
 pkg install -y ncurses-utils
 
 # Démarrer le script
@@ -69,7 +70,6 @@ clear
 display_banner
 center_text "Appuyez sur Entrée pour exécuter l'installation de Termux ..." "$BLUE"
 read -p ""
-pkg update -y && pkg upgrade -y
 
 # Installation des packages Termux
 clear
