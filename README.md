@@ -2,7 +2,7 @@
  
 Automated installation and configuration of Termux.
 
-🧊 Package sélection :
+🧊 Package selection :
 - wget
 - curl
 - gît
