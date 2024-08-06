@@ -6,7 +6,7 @@ Automated installation and configuration of Termux.
 - wget
 - curl
 - [git](https://github.com/git/git)
-- zsh
+- [zsh](https://github.com/zsh-users/zsh)
 - nala
 - eza
 - bat
@@ -31,7 +31,7 @@ Automated installation and configuration of Termux.
 🧊 Termux graphics configuration :
 - Fonts
 - Colors
-- Custom Powerlevel10k prompt
+- [Powerlevel10k] prompt(https://github.com/romkatv/powerlevel10k)
 
 🧊 Directory of various scipts :
 - Theme Selector
