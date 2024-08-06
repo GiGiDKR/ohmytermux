@@ -22,21 +22,21 @@ EOF
 center_color_text() {
     local text="$1"
     local color="$2"
-    local width=$(( (COLUMNS - ${#text}) / 2 ))
-    printf "%*s${color}%s${RESET}\n" $width '' "$text"
+    local width=$(stty size | awk '{print $2}')
+    local padding=$(( (width - ${#text}) / 2 ))
+    printf "%*s${color}%s${RESET}\n" $padding '' "$text"
 }
 
 # Fonction pour centrer une ligne de texte sans couleur
 center_text() {
     local text="$1"
-    local width=$(( (COLUMNS - ${#text}) / 2 ))
-    printf "%*s%s\n" $width '' "$text"
+    local width=$(stty size | awk '{print $2}')
+    local padding=$(( (width - ${#text}) / 2 ))
+    printf "%*s%s\n" $padding '' "$text"
 }
 
 # Fonction pour afficher la bannière
 display_banner() {
-    # Obtenir la largeur du terminal
-    COLUMNS=$(tput cols)
     while IFS= read -r line; do
         center_color_text "$line" "$BLUE"
     done <<< "$banner"
@@ -82,19 +82,6 @@ center_color_text "Termux à jour et packages installés !" "$GREEN"
 center_text ""
 center_text "Appuyez sur Entrée pour configurer Termux ..." "$BLUE"
 read -p ""
-
-# Création des répertoires utilisateur
-cd ~/
-clear
-display_banner
-center_color_text "Création des répertoires utilisateur ..." "$YELLOW"
-ln -s $HOME/storage/downloads "📂 Téléchargement"
-ln -s $HOME/storage/pictures "🖼️ Images"
-ln -s $HOME/storage/dcim "📸 Photos"
-ln -s $HOME/storage/movies "🎥 Vidéos"
-ln -s $HOME/storage/music "🎵 Musique"
-ln -s $HOME/storage/documents "📄 Documents"
-ln -s $HOME/storage/shared "📁 Stockage Interne"
 
 # Suppression du message de bienvenue par défaut de Termux
 rm -f $PREFIX/etc/motd
