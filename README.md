@@ -1,5 +1,5 @@
-# OhMyTermux :glace_cube
-
+# OhMyTermux 🧊
+ 
 Automated installation and configuration of Termux.
 
 🧊 Package sélection :
