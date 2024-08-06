@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Couleurs
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
@@ -8,7 +7,6 @@ BLUE='\033[0;34m'
 CYAN='\033[0;36m'
 RESET='\033[0m' # No Color
 
-# Variable pour la bannière
 banner=$(cat << 'EOF'
   ____  __     __  ___       ______                       
  / __ \/ /    /  |/  /_ __  /_  __/__ ______ _  __ ____ __
@@ -42,30 +40,28 @@ display_banner() {
     done <<< "$banner"
 }
 
-# Afficher la bannière centrée et colorée au début du script
 clear
 display_banner
 
-# Ne pas arrêter le script en cas d'erreur
+# Arrêter le script en cas d'erreur (décommenter)
 # set -e
 
 center_text ""
 # Demande d'accès au stockage externe
-center_text "Appuyez sur Entrée pour accorder l'accès au stockage externe ..."
+center_text "Appuyez sur Entrée pour accorder l'accès au stockage externe ..." "$BLUE"
 read -p ""
 termux-setup-storage
 
-# Afficher la bannière avant la sélection du répertoire de sources Termux
 clear
 display_banner
-center_text "Appuyez sur Entrée pour sélectionner un repository ..."
+center_text "Appuyez sur Entrée pour sélectionner un repository ..." "$BLUE"
 read -p ""
 termux-change-repo
 
 # Mise à jour de Termux
 clear
 display_banner
-center_text "Appuyez sur Entrée pour exécuter l'installation de Termux ..."
+center_text "Appuyez sur Entrée pour exécuter l'installation de Termux ..." "$BLUE"
 read -p ""
 pkg update -y && pkg upgrade -y
 
@@ -76,9 +72,9 @@ pkg install -y wget git zsh curl nala eza lf fzf bat unzip glow lsd
 
 clear
 display_banner
-center_color_text "Termux à jour et packages installés !" "$BLUE"
+center_color_text "Termux à jour et packages installés !" "$GREEN"
 center_text ""
-center_text "Appuyez sur Entrée pour configurer Termux ..."
+center_text "Appuyez sur Entrée pour configurer Termux ..." "$BLUE"
 read -p ""
 
 cd ~/
@@ -97,6 +93,7 @@ ln -s $HOME/storage/shared "📁 Stockage Interne"
 rm -f $PREFIX/etc/motd
 
 # Copier les fichiers de configuration personnalisés
+center_color_text "Copie des fichiers de configuration ..." "$YELLOW"
 cp -r $HOME/OhMyTermux/src/* $HOME/.termux/
 
 # Définir les répertoires de couleurs et de polices
@@ -111,14 +108,14 @@ FONTS_DIR_TERMUXSTYLE=$HOME/.termux/fonts/fonts_termuxstyle
 # Décompression des fichiers ZIP
 clear
 display_banner
-center_color_text "Décompression des archives ..." "$GREEN"
+center_color_text "Décompression des archives ..." "$BLUE"
 unzip -o "$HOME/.termux/fonts_termuxstyle.zip" -d "$HOME/.termux/fonts"
 unzip -o "$HOME/.termux/colors.zip" -d "$HOME/.termux/"
 
 # Installation de Oh-My-Zsh et des plugins
 clear
 display_banner
-center_text "Appuyez sur Entrée pour installer Oh-My-Zsh et des plugins ..."
+center_text "Appuyez sur Entrée pour installer Oh-My-Zsh et des plugins ..." "$BLUE"
 read -p ""
 
 # Vérifier et supprimer les répertoires existants
@@ -139,10 +136,10 @@ done
 center_color_text "Installation de Oh-My-Zsh ..." "$BLUE"
 git clone https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh" || true
 
-center_color_text "Installation du thème powerlevel10k ..." "$YELLOW"
+center_color_text "Installation du prompt powerlevel10k ..." "$YELLOW"
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/.oh-my-zsh/custom/themes/powerlevel10k" || true
 
-center_color_text "Installation des plugins ..." "$GREEN"
+center_color_text "Installation des plugins ..." "$YELLOW"
 git clone https://github.com/zsh-users/zsh-autosuggestions.git "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions" || true
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" || true
 git clone https://github.com/zsh-users/zsh-completions.git "$HOME/.oh-my-zsh/custom/plugins/zsh-completions" || true
@@ -150,39 +147,39 @@ git clone https://github.com/MichaelAquilina/zsh-you-should-use.git ${ZSH_CUSTOM
 git clone https://github.com/olets/zsh-abbr ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-abbr || true
 git clone https://github.com/akash329d/zsh-alias-finder ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-alias-finder || true
 
+clear
+display_banner
 center_color_text "Configuration de Oh-My-Zsh ..." "$BLUE"
 cp -f "$HOME/OhMyTermux/zshrc" "$HOME/.zshrc"
 cp -f "$HOME/OhMyTermux/aliases.zsh" "$HOME/.oh-my-zsh/custom/aliases.zsh"
 
-center_color_text "Configuration du thème powerlevel10k ..." "$YELLOW"
+center_color_text "Configuration du prompt powerlevel10k ..." "$YELLOW"
 cp -f "$HOME/OhMyTermux/p10k.zsh" "$HOME/.p10k.zsh"
 
-clear
-display_banner
-center_color_text "Oh-My-Zsh installé !" "$GREEN"
+center_color_text "Oh-My-Zsh et la sélection de plugins installés !" "$GREEN"
 termux-reload-settings
 
-center_color_text "Définition de zsh comme shell par défaut ..." "$BLUE"
-chsh -s zsh
-
-source ~/.zshrc
-
 clear
 display_banner
-center_color_text "Installation de OhMyTermux terminée !" "$GREEN"
-center_text ""
-center_color_text "(⁠*⁠_⁠*⁠) Saisir 'help' pour des informations sur la configuration" "$YELLOW"
-center_text ""
-center_text "Appuyez sur Entrée pour redémarrer ..."
-read -p ""
+center_color_text "Définition de ZSH comme shell par défaut ..." "$BLUE"
+chsh -s zsh
 
 # Copier les scripts dans le répertoire $HOME/Scripts
 mkdir -p $HOME/Scripts
 cp -r $HOME/OhMyTermux/scripts/* $HOME/Scripts/
 center_color_text "Scripts copiés dans le répertoire ~/Scripts." "$BLUE"
 
-# Nettoyage
-rm -rf $HOME/OhMyTermux
+clear
+display_banner
+center_color_text "Installation de OhMyTermux terminée !" "$GREEN"
+center_text ""
+center_color_text "Saisir 'help' pour des informations sur la configuration" "$BLUE"
+center_text ""
+center_text "Appuyez sur Entrée pour redémarrer ..." "$CYAN"
+read -p ""
+
+# Nettoyage (décommenter dans la version finale)
+#rm -rf $HOME/OhMyTermux
 
 clear
 exec zsh
