@@ -8,14 +8,6 @@ BLUE='\033[0;34m'
 CYAN='\033[0;36m'
 RESET='\033[0m' # No Color
 
-# Fonction pour centrer et colorer une ligne de texte
-center_color_text() {
-    local text="$1"
-    local color="$2"
-    local width=$(( (COLUMNS - ${#text}) / 2 ))
-    printf "%*s${color}%s${RESET}\n" $width '' "$text"
-}
-
 # Variable pour la bannière
 banner=$(cat << 'EOF'
   ____  __     __  ___       ______                       
@@ -26,36 +18,49 @@ banner=$(cat << 'EOF'
 EOF
 )
 
-# Obtenir la largeur du terminal
-COLUMNS=$(tput cols)
+# Fonction pour centrer et colorer une ligne de texte
+center_color_text() {
+    local text="$1"
+    local color="$2"
+    local width=$(( (COLUMNS - ${#text}) / 2 ))
+    printf "%*s${color}%s${RESET}\n" $width '' "$text"
+}
 
-# Afficher la bannière centrée et colorée
-while IFS= read -r line; do
-    center_color_text "$line" "$BLUE"
-done <<< "$banner"
+# Fonction pour afficher la bannière
+display_banner() {
+    # Obtenir la largeur du terminal
+    COLUMNS=$(tput cols)
+    while IFS= read -r line; do
+        center_color_text "$line" "$BLUE"
+    done <<< "$banner"
+}
+
+# Afficher la bannière centrée et colorée au début du script
+display_banner
 
 # Ne pas arrêter le script en cas d'erreur
 # set -e
 
-clear
-banner
 echo ""
 # Demande d'accès au stockage externe
 read -p "Appuyez sur Entrée pour accorder l'accès au stockage externe ..."
 termux-setup-storage
 
-# Sélection du répertoire de sources Termux
+# Afficher la bannière avant la sélection du répertoire de sources Termux
 clear
+display_banner
 read -p "Appuyez sur Entrée pour sélectionner un repository ..."
 termux-change-repo
 
 # Mise à jour de Termux
 clear
+display_banner
 read -p "Appuyez sur Entrée pour exécuter l'installation de Termux ..."
 pkg update -y && pkg upgrade -y
 
 # Installation des packages Termux
 clear
+display_banner
 pkg install -y wget git zsh curl nala eza lf fzf bat unzip lsd
 
 clear
@@ -65,6 +70,7 @@ read -p "Appuyez sur Entrée pour configurer Termux ..."
 
 cd ~/
 clear
+display_banner
 echo -e "${YELLOW}Création des répertoires utilisateur ...${RESET}"
 ln -s $HOME/storage/downloads "📂 Téléchargement"
 ln -s $HOME/storage/pictures "🖼️ Images"
@@ -91,12 +97,14 @@ FONTS_DIR_TERMUXSTYLE=$HOME/.termux/fonts/fonts_termuxstyle
 
 # Décompression des fichiers ZIP
 clear
+display_banner
 echo -e "${GREEN}Décompression des archives ...${RESET}"
 unzip -o "$HOME/.termux/fonts_termuxstyle.zip" -d "$HOME/.termux/fonts"
 unzip -o "$HOME/.termux/colors.zip" -d "$HOME/.termux/"
 
 # Installation de Oh-My-Zsh et des plugins
 clear
+display_banner
 read -p "Appuyez sur Entrée pour installer Oh-My-Zsh et des plugins ..."
 
 # Vérifier et supprimer les répertoires existants
@@ -129,4 +137,10 @@ git clone https://github.com/olets/zsh-abbr ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/p
 git clone https://github.com/akash329d/zsh-alias-finder ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-alias-finder || true
 
 echo -e "${BLUE}Configuration de Oh-My-Zsh ...${RESET}"
-cp -f "$HOME/OhMyTermux/zshrc" "$
+cp -f "$HOME/OhMyTermux/zshrc" "$HOME/.zshrc"
+cp -f "$HOME/OhMyTermux/aliases.zsh" "$HOME/.oh-my-zsh/custom/aliases.zsh"
+
+echo -e "${YELLOW}Configuration du thème powerlevel10k ...${RESET}"
+cp -f "$HOME/OhMyTermux/p10k.zsh" "$HOME/.p10k.zsh"
+
+clear
