@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Couleurs pour le texte
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
@@ -7,6 +8,7 @@ BLUE='\033[0;34m'
 CYAN='\033[0;36m'
 RESET='\033[0m' # No Color
 
+# Bannière
 banner=$(cat << 'EOF'
   ____  __     __  ___       ______                       
  / __ \/ /    /  |/  /_ __  /_  __/__ ______ _  __ ____ __
@@ -40,10 +42,14 @@ display_banner() {
     done <<< "$banner"
 }
 
+# Assurez-vous que ncurses-utils est installé
+pkg install -y ncurses-utils
+
+# Démarrer le script
 clear
 display_banner
 
-# Arrêter le script en cas d'erreur (décommenter)
+# Arrêter le script en cas d'erreur (décommenter si nécessaire)
 # set -e
 
 center_text ""
@@ -77,6 +83,7 @@ center_text ""
 center_text "Appuyez sur Entrée pour configurer Termux ..." "$BLUE"
 read -p ""
 
+# Création des répertoires utilisateur
 cd ~/
 clear
 display_banner
@@ -179,7 +186,7 @@ center_text "Appuyez sur Entrée pour redémarrer ..." "$CYAN"
 read -p ""
 
 # Nettoyage (décommenter dans la version finale)
-#rm -rf $HOME/OhMyTermux
+# rm -rf $HOME/OhMyTermux
 
 clear
 exec zsh
