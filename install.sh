@@ -8,19 +8,35 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 # Fonction pour afficher la bannière
-banner() {
-    echo -e "${YELLOW}========================================${NC}"
-    echo -e "${GREEN}|              OHMYTERMUX              |${NC}"
-    echo -e "${YELLOW}========================================${NC}"
-    echo ""
+# Obtenir la largeur du terminal
+COLUMNS=$(tput cols)
+
+# Définir les codes de couleur
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+RESET='\033[0m'
+
+# Fonction pour centrer et colorer une ligne de texte
+center_color_text() {
+    local text="$1"
+    local color="$2"
+    local width=$(( (COLUMNS - ${#text}) / 2 ))
+    printf "%*s${color}%s${RESET}\n" $width '' "$text"
 }
+
+# Afficher la bannière centrée et colorée
+center_color_text "  ____  __     __  ___       ______                       " "$BLUE"
+center_color_text " / __ \/ /    /  |/  /_ __  /_  __/__ ______ _  __ ____ __" "$BLUE"
+center_color_text "/ /_/ / _ \  / /|_/ / // /   / / / -_) __/  ' \/ // /\ \ /" "$CYAN"
+center_color_text "\____/_//_/ /_/  /_/\_, /   /_/  \__/_/ /_/_/_/\_,_//_\_\ " "$CYAN"
+center_color_text "                   /___/                                  " "$CYAN"
 
 # Ne pas arrêter le script en cas d'erreur
 # set -e
 
 # Afficher la bannière
 banner
-
+echo ""
 # Demande d'accès au stockage externe
 read -p "Appuyez sur Entrée pour accorder l'accès au stockage externe ..."
 termux-setup-storage
