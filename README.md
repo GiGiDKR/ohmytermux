@@ -5,7 +5,7 @@ Automated installation and configuration of Termux.
 🧊 Package selection :
 - wget
 - curl
-- git
+- [git](https://github.com/git/git)
 - zsh
 - nala
 - eza
