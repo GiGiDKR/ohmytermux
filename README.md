@@ -59,3 +59,7 @@ To obtain information on the installation carried out, the programs and tools ac
 ````
 help
 ````
+
+-----
+
+This directory contains the files of a current project which are modified regularly. 
