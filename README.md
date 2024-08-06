@@ -51,7 +51,8 @@ pkg update -y && pkg install git -y
 git clone https://github.com/GiGiDKR/OhMyTermux.git && cd OhMyTermux && chmod +x install.sh && ./install.sh
 ````
 
-------
+## Configuration
+
 
 To obtain information on the installation carried out, the programs and tools accessible, the commands to use as well as the aliases defined: 
 ````
