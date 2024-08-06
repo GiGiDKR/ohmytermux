@@ -1,4 +1,4 @@
-# OhMyTermux
+# OhMyTermux :glace_cube
 
 Automated installation and configuration of Termux.
 
