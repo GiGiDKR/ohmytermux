@@ -43,6 +43,7 @@ display_banner() {
 }
 
 # Afficher la bannière centrée et colorée au début du script
+clear
 display_banner
 
 # Ne pas arrêter le script en cas d'erreur
