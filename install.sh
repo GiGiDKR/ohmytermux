@@ -72,7 +72,7 @@ pkg update -y && pkg upgrade -y
 # Installation des packages Termux
 clear
 display_banner
-pkg install -y wget git zsh curl nala eza lf fzf bat unzip lsd
+pkg install -y wget git zsh curl nala eza lf fzf bat unzip glow lsd
 
 clear
 display_banner
