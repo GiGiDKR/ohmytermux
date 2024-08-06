@@ -14,6 +14,7 @@ Automated installation and configuration of Termux.
 - fzf  
 - unzip
 - glow
+- lsd
 - python (optionnal)
 
 🧊 ZSH shell set by default :
