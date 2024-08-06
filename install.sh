@@ -43,7 +43,6 @@ display_banner() {
 }
 
 # Assurez-vous que ncurses-utils est installé
-pkg update -y && pkg upgrade -y
 pkg install -y ncurses-utils
 
 # Démarrer le script
