@@ -74,6 +74,7 @@ display_banner
 pkg install -y wget git zsh curl nala eza lf fzf bat unzip lsd
 
 clear
+display_banner
 center_color_text "Termux à jour et packages installés !" "$BLUE"
 center_text ""
 center_text "Appuyez sur Entrée pour configurer Termux ..."
