@@ -31,7 +31,7 @@ Automated installation and configuration of Termux.
 🧊 Termux graphics configuration :
 - Fonts
 - Colors
-- [Powerlevel10k prompt](https://github.com/romkatv/powerlevel10k)
+- [Powerlevel10k](https://github.com/romkatv/powerlevel10k) prompt
 
 🧊 Directory of various scipts :
 - Theme Selector
