@@ -33,6 +33,7 @@ clear
 display_banner
 
 # Création des répertoires utilisateur
+cd $HOME
 center_color_text "Création des répertoires utilisateur ..." "$YELLOW"
 ln -s $HOME/storage/downloads "📂 Téléchargement"
 ln -s $HOME/storage/pictures "🖼️ Images"
