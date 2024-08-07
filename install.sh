@@ -103,7 +103,7 @@ clear
 display_banner
 center_color_text "Décompression des archives ..." "$BLUE"
 unzip -o "$HOME/.termux/fonts_termuxstyle.zip" -d "$HOME/.termux/fonts"
-unzip -o "$h -d "$HOME/.termux/"
+unzip -o "$HOME/.termux/colors.zip" -d "$HOME/.termux/"
 rm "$HOME/.termux/fonts_termuxstyle.zip"
 rm "$HOME/.termux/colors.zip"
 
@@ -151,6 +151,9 @@ cp -f "$HOME/OhMyTermux/aliases.zsh" "$HOME/.oh-my-zsh/custom/aliases.zsh"
 center_color_text "Configuration du prompt powerlevel10k ..." "$YELLOW"
 cp -f "$HOME/OhMyTermux/p10k.zsh" "$HOME/.p10k.zsh"
 
+# Ajouter l'alias help dans .zshrc
+echo "alias help='glow \$HOME/.config/OhMyTermux/Readme.md'" >> "$HOME/.zshrc"
+
 center_color_text "Oh-My-Zsh et la sélection de plugins installés !" "$GREEN"
 termux-reload-settings
 
@@ -162,7 +165,13 @@ chsh -s zsh
 # Copier les scripts dans le répertoire $HOME/Scripts
 mkdir -p $HOME/Scripts
 cp -r $HOME/OhMyTermux/scripts/* $HOME/Scripts/
+chmod +x $HOME/OhMyTermux/scripts/*.sh
 center_color_text "Scripts copiés dans le répertoire ~/Scripts." "$BLUE"
+
+# Copier le fichier Readme.md dans le répertoire $HOME/.config/OhMyTermux
+mkdir -p $HOME/.config/OhMyTermux
+cp -f $HOME/OhMyTermux/Readme.md $HOME/.config/OhMyTermux/
+center_color_text "Readme.md copié dans le répertoire ~/.config/OhMyTermux." "$BLUE"
 
 clear
 display_banner
@@ -173,8 +182,8 @@ center_text ""
 center_text "Appuyez sur Entrée pour redémarrer ..." "$CYAN"
 read -p ""
 
-# Nettoyage (décommenter dans la version finale)
-# rm -rf $HOME/OhMyTermux
+# Nettoyage
+rm -rf $HOME/OhMyTermux
 
 clear
 exec zsh
