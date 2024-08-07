@@ -152,7 +152,7 @@ center_color_text "Configuration du prompt powerlevel10k ..." "$YELLOW"
 cp -f "$HOME/OhMyTermux/p10k.zsh" "$HOME/.p10k.zsh"
 
 # Ajouter l'alias help dans .zshrc
-echo "alias help='glow \$HOME/.config/OhMyTermux/Readme.md'" >> "$HOME/.zshrc"
+echo "alias help='glow \$HOME/.config/OhMyTermux/Help.md'" >> "$HOME/.zshrc"
 
 center_color_text "Oh-My-Zsh et la sélection de plugins installés !" "$GREEN"
 termux-reload-settings
@@ -170,7 +170,7 @@ center_color_text "Scripts copiés dans le répertoire ~/Scripts." "$BLUE"
 
 # Copier le fichier Readme.md dans le répertoire $HOME/.config/OhMyTermux
 mkdir -p $HOME/.config/OhMyTermux
-cp -f $HOME/OhMyTermux/help.md $HOME/.config/OhMyTermux/
+cp -f $HOME/OhMyTermux/Help.md $HOME/.config/OhMyTermux/
 center_color_text "Readme.md copié dans le répertoire ~/.config/OhMyTermux." "$BLUE"
 
 clear
