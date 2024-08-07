@@ -105,7 +105,7 @@ center_color_text "Décompression des archives ..." "$BLUE"
 unzip -o "$HOME/.termux/fonts_termuxstyle.zip" -d "$HOME/.termux/fonts"
 unzip -o "$h -d "$HOME/.termux/"
 rm "$HOME/.termux/fonts_termuxstyle.zip"
-rm "HOME/.termux/colors.zip"
+rm "$HOME/.termux/colors.zip"
 
 # Installation de Oh-My-Zsh et des plugins
 clear
