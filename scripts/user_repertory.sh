@@ -28,19 +28,41 @@ EOF
     done <<< "$banner"
 }
 
+# Fonction pour créer les liens symboliques
+create_symlinks() {
+    center_color_text "Création des répertoires utilisateur ..." "$YELLOW"
+    cd $HOME
+    ln -s $HOME/storage/downloads "📂 Téléchargement"
+    ln -s $HOME/storage/pictures "🖼️ Images"
+    ln -s $HOME/storage/dcim "📸 Photos"
+    ln -s $HOME/storage/movies "🎥 Vidéos"
+    ln -s $HOME/storage/music "🎵 Musique"
+    ln -s $HOME/storage/documents "📄 Documents"
+    ln -s $HOME/storage/shared "📁 Stockage Interne"
+    center_color_text "Répertoires utilisateur créés avec succès !" "$YELLOW"
+}
+
+# Fonction pour supprimer les liens symboliques
+remove_symlinks() {
+    center_color_text "Suppression des liens symboliques des répertoires utilisateur ..." "$YELLOW"
+    cd $HOME
+    rm "📂 Téléchargement"
+    rm "🖼️ Images"
+    rm "📸 Photos"
+    rm "🎥 Vidéos"
+    rm "🎵 Musique"
+    rm "📄 Documents"
+    rm "📁 Stockage Interne"
+    center_color_text "Liens symboliques supprimés avec succès !" "$YELLOW"
+}
+
 # Afficher la bannière
 clear
 display_banner
 
-# Création des répertoires utilisateur
-cd $HOME
-center_color_text "Création des répertoires utilisateur ..." "$YELLOW"
-ln -s $HOME/storage/downloads "📂 Téléchargement"
-ln -s $HOME/storage/pictures "🖼️ Images"
-ln -s $HOME/storage/dcim "📸 Photos"
-ln -s $HOME/storage/movies "🎥 Vidéos"
-ln -s $HOME/storage/music "🎵 Musique"
-ln -s $HOME/storage/documents "📄 Documents"
-ln -s $HOME/storage/shared "📁 Stockage Interne"
-
-center_color_text "Répertoires utilisateur créés avec succès !" "$YELLOW"
+# Vérifier le paramètre --uninstall
+if [[ "$1" == "--uninstall" ]]; then
+    remove_symlinks
+else
+    create_symlinks
+fi
