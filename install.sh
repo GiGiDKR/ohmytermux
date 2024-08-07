@@ -170,7 +170,7 @@ center_color_text "Scripts copiés dans le répertoire ~/Scripts." "$BLUE"
 
 # Copier le fichier Readme.md dans le répertoire $HOME/.config/OhMyTermux
 mkdir -p $HOME/.config/OhMyTermux
-cp -f $HOME/OhMyTermux/Readme.md $HOME/.config/OhMyTermux/
+cp -f $HOME/OhMyTermux/help.md $HOME/.config/OhMyTermux/
 center_color_text "Readme.md copié dans le répertoire ~/.config/OhMyTermux." "$BLUE"
 
 clear
