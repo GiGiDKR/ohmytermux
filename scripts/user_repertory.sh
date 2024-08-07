@@ -60,8 +60,8 @@ remove_symlinks() {
 clear
 display_banner
 
-# Vérifier le paramètre --uninstall
-if [[ "$1" == "--uninstall" ]]; then
+# Vérifier le paramètre -uninstall
+if [[ "$1" == "-uninstall" ]]; then
     remove_symlinks
 else
     create_symlinks
