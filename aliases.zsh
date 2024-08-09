@@ -28,6 +28,6 @@ alias prop='nano $HOME/.termux/termux.properties'
 alias gc='git clone'
 alias tmx='cd $HOME/.termux'
 alias cm='chmod +x'
-alias push="git pull && git add . && git commit -m 'mobile push' && git push'"
+alias push="git pull && git add . && git commit -m 'mobile push' && git push"
 alias zshconfig="nano ~/.zshrc"
 alias ohmyzsh="nano ~/.oh-my-zsh"
